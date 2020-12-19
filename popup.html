@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Video Playback Adjuster</title>
+    <script src="popup.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Playback Speed Controller</h1>
+    <h2>Select a playback speed</h2>
+    <!-- <button id="checkPage">Check this page now!</button> -->
+    <div id="main-btns">
+      <button id="1.0-btn">1.0</button>
+      <button id="1.5-btn">1.5</button>
+      <button id="2.0-btn">2.0</button>
+    </div>
+    <!-- <button id="custom-btn">Custom</button> -->
+    <br>
+    <div id="custom">
+      <label for="custom-speed">Custom Speed:</label>
+      <input type="number" id="custom-speed" name="custom-speed" step="0.01" min="0.1" max="16.0">
+      <button id="custom-btn">Adjust Speed</button>
+    </div>
+  </body>
+</html>
