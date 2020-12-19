@@ -2,4 +2,36 @@ body {
   width: 200px;
   height: 200px;
   text-align: center;
+  background-color: #0B0C10;
+  color: white;
+}
+
+#main-btns > button {
+  width: 50px;
+  height: 30px;
+  font-size: 16px;
+}
+
+button, input {
+  background-color: #45A29E;
+  color: white;
+}
+
+.active {
+  background-color: #66FCF1;
+}
+
+h2, label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#settings-img {
+  width: 24px;
+  height: 24px;
+  float: right;
+}
+
+.hidden {
+  display: none;
 }

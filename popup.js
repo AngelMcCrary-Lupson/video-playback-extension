@@ -7,6 +7,32 @@ document.addEventListener('DOMContentLoaded', function() {
     return str;
   }
 
+  var mainView = true;
+
+  function toggleView() {
+    var mainDiv = document.getElementById('main-view');
+    var settingsDiv = document.getElementById('settings-view');
+    if (mainView) {
+      mainView = false;
+      mainDiv.className = "hidden";
+      settingsDiv.className = "";
+    } else {
+      mainView = true;
+      mainDiv.className = "";
+      settingsDiv.className = "hidden";
+    }
+  }
+
+  var settings = document.getElementById('settings-img');
+  settings.addEventListener('click', function() {
+    toggleView();
+  }, false);
+
+  var backBtn = document.getElementById('back-btn');
+  backBtn.addEventListener('click', function(){
+    toggleView();
+  }, false);
+
   var oneButton = document.getElementById('1.0-btn');
   oneButton.addEventListener('click', function() {
     var code = adjustPlayback("1.0");
@@ -28,9 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
         {code: code}, function(results){console.log("Changed speed: " + results);});
   }, false);
 
-  var customButton = document.getElementById('custom-btn');
-  customButton.addEventListener('click', function() {
-    var input = document.getElementById('custom-speed');
+  var manualButton = document.getElementById('manual-btn');
+  manualButton.addEventListener('click', function() {
+    var input = document.getElementById('manual-speed');
     var speed = input.value + "";
     var code = adjustPlayback(speed);
     chrome.tabs.executeScript(null,
