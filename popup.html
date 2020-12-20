@@ -17,7 +17,7 @@
         <button id="1.5-btn">1.5</button>
         <button id="2.0-btn">2.0</button>
       </div>
-      
+
       <br>
 
       <div id="custom-btns-div">
@@ -32,22 +32,40 @@
     </div>
 
     <div id="settings-view" class="hidden">
-      <h1 id="back-btn">Back</h1>
-      <h2>Edit custom playback buttons</h2>
+      <img id="back-btn" src="back-btn.png"/>
 
-      <label for="custom-btns">Button</label>
-      <select name="custom-btns" id="custom-btns">
-        <option value="1">Button 1</option>
-        <option value="2">Button 2</option>
-        <option value="3">Button 3</option>
-      </select>
       <br>
-      <label for="custom-btn">Speed</label>
-      <input type="number" id="custom-btn" name="custom-btn" step="0.01" min="0.1" max="16.0" required>
-      <label for="btn-enabled">Enabled</label>
-      <input type="checkbox" id="btn-enabled" name="btn-enabled" checked>
-      <br>
-      <button id="save-btn">Save</button>
+      
+      <h2>Edit Custom Buttons</h2>
+
+      <div class="column">
+        <div class="row">
+          <label for="custom-btns">Button</label>
+          <select name="custom-btns" id="custom-btns">
+            <option value="1">Button 1</option>
+            <option value="2">Button 2</option>
+            <option value="3">Button 3</option>
+          </select>
+        </div>
+
+        <br>
+
+        <div class="row">
+          <label for="custom-btn">Speed</label>
+          <input type="number" id="custom-btn" name="custom-btn" step="0.01" min="0.1" max="16.0" >
+        </div>
+
+        <br>
+
+        <div class="row">
+          <label for="btn-enabled">Enabled</label>
+          <input type="checkbox" id="btn-enabled" name="btn-enabled" checked>
+        </div>
+
+        <br>
+
+        <button id="save-btn">Save</button>
+      </div>
 
     </div>
 

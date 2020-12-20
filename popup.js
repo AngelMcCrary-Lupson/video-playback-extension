@@ -1,4 +1,4 @@
-// TODO: Add CSS, Add Input Validation
+// TODO: Add CSS, Add Input Validation, Populate select input with saved values
 
 document.addEventListener('DOMContentLoaded', function() {
 

@@ -2,11 +2,11 @@
   "manifest_version": 2,
 
   "name": "Video Playback Extension",
-  "description": "This extension will allow users to adjust a video's playback speed",
+  "description": "Adjust a video's playback speed.",
   "version": "1.0",
 
   "browser_action": {
-   "default_icon": "favicon.ico",
+   "default_icon": "icon.png",
    "default_popup": "popup.html"
   },
   "permissions": [

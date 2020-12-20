@@ -9,7 +9,7 @@ body {
 #main-btns, #custom-btns-div {
   display: flex;
   flex-flow: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 #main-btns > button, #custom-btns-div > button {
@@ -19,7 +19,7 @@ body {
   padding: 5px;
 }
 
-button, input {
+button, input, select {
   background-color: #45A29E;
   color: white;
 }
@@ -34,15 +34,33 @@ h2, label {
 }
 
 #settings-img {
+  float: right;
+}
+
+#back-btn {
+  float: left;
+}
+
+#settings-img, #back-btn {
   width: 24px;
   height: 24px;
-  float: right;
 }
 
 .hidden {
   display: none;
 }
 
-#manual {
+#manual, #settings-view {
   padding-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.column {
+  flex: 50%;
 }
