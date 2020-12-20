@@ -1,4 +1,4 @@
-// TODO: Add Error Message
+// TODO: Clean Up Code
 
 document.addEventListener('DOMContentLoaded', function() {
 
