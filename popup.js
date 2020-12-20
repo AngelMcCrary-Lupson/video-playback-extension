@@ -32,11 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var btnSpeed = btnValue.split("-")[0];
         var button = document.createElement('button');
         button.innerText = btnSpeed;
-        button.addEventListener('click', function() {
-          var code = adjustPlayback(btnSpeed);
-          chrome.tabs.executeScript(null,
-              {code: code}, function(results){console.log("Changed speed: " + results);});
-        }, false);
+        button.addEventListener('click', adjustButton, false);
         customDiv.appendChild(button);
       } else if (btnValue == null) {
         store.setItem('btn-1', '0.0-false');
@@ -44,6 +40,13 @@ document.addEventListener('DOMContentLoaded', function() {
         store.setItem('btn-3', '0.0-false');
       }
     }
+  }
+
+  function adjustButton(evt) {
+    var code = adjustPlayback(evt.target.innerText);
+    chrome.tabs.executeScript(null,
+        {code: code}, function(results){console.log("Changed speed: " + results);}
+      );
   }
 
 
