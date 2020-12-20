@@ -6,10 +6,17 @@ body {
   color: white;
 }
 
-#main-btns > button {
+#main-btns, #custom-btns-div {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+#main-btns > button, #custom-btns-div > button {
   width: 50px;
   height: 30px;
   font-size: 16px;
+  padding: 5px;
 }
 
 button, input {
@@ -34,4 +41,8 @@ h2, label {
 
 .hidden {
   display: none;
+}
+
+#manual {
+  padding-bottom: 10px;
 }

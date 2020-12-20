@@ -1,6 +1,52 @@
-// TODO: Add CSS, Add Input Validation, Add Users Make Custom Buttons
+// TODO: Add CSS, Add Input Validation
 
 document.addEventListener('DOMContentLoaded', function() {
+
+  var store = window.localStorage;
+
+  function removeChildren(parent) {
+    while (parent.hasChildNodes()) {
+      parent.removeChild(parent.firstChild);
+    }
+  }
+
+  var editBtn = document.getElementById('save-btn');
+  editBtn.addEventListener('click', function() {
+    var speedVal = document.getElementById('custom-btn').value;
+    var enabled = document.getElementById('btn-enabled').checked;
+    var btn = document.getElementById('custom-btns').value;
+    var storeKey = "btn-" + btn;
+    var storeValue = speedVal + "-" + enabled;
+    store.setItem(storeKey, storeValue);
+    loadCustomButtons();
+  }, false);
+
+  function loadCustomButtons() {
+    var customDiv = document.getElementById('custom-btns-div');
+    removeChildren(customDiv);
+    for (let i = 1; i <= 3; i++) {
+      var btnValue = store.getItem('btn-' + i);
+      var btnEnabled = btnValue.split("-")[1];
+
+      if (btnEnabled == "true") {
+        var btnSpeed = btnValue.split("-")[0];
+        var button = document.createElement('button');
+        button.innerText = btnSpeed;
+        button.addEventListener('click', function() {
+          var code = adjustPlayback(btnSpeed);
+          chrome.tabs.executeScript(null,
+              {code: code}, function(results){console.log("Changed speed: " + results);});
+        }, false);
+        customDiv.appendChild(button);
+      } else if (btnValue == null) {
+        store.setItem('btn-1', '0.0-false');
+        store.setItem('btn-2', '0.0-false');
+        store.setItem('btn-3', '0.0-false');
+      }
+    }
+  }
+
+
   function adjustPlayback(speed) {
     let str = "document.getElementsByTagName(\"video\")[0].playbackRate = ";
     str += speed + ";";
@@ -63,30 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
         {code: code}, function(results){console.log("Changed speed: " + results);});
   }, false);
 
-  // var checkPageButton = document.getElementById('checkPage');
-  // checkPageButton.addEventListener('click', function() {
-  //
-  //   // function playback() {
-  //   //   document.getElementsByTagName("video")[0].playbackRate = 2.0;
-  //   // }
-  //
-  //   chrome.tabs.getSelected(null, function(tab) {
-  //     console.log(tab);
-  //     // d = document;
-  //     //
-  //     // var f = d.createElement('form');
-  //     // f.action = 'http://gtmetrix.com/analyze.html?bm';
-  //     // f.method = 'post';
-  //     // var i = d.createElement('input');
-  //     // i.type = 'hidden';
-  //     // i.name = 'url';
-  //     // i.value = tab.url;
-  //     // f.appendChild(i);
-  //     // d.body.appendChild(f);
-  //     // f.submit();
-  //   });
-  //
-  //   chrome.tabs.executeScript(null,
-  //     {code: "document.getElementsByTagName(\"video\")[0].playbackRate = 2.0;"}, function(results){console.log("Changed speed: " + results);});
-  // }, false);
+  loadCustomButtons();
+
 }, false);
