@@ -4,6 +4,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var store = window.localStorage;
 
+  var timer = null;
+  var errorMsg = document.getElementById('error');
+  var afterErrorMessage = function () {
+    errorMsg.className = "hidden";
+    clearTimeout(timer);
+  };
+
+  var startTimer = function () {
+    errorMsg.className = "";
+    timer = setTimeout(afterErrorMessage, 2500);
+  };
+
+
   function removeChildren(parent) {
     while (parent.hasChildNodes()) {
       parent.removeChild(parent.firstChild);
@@ -15,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (num >= 0.1 && num <= 16) {
       return true;
     }
-    console.log("Error");
+    startTimer();
     return false;
   }
 
@@ -125,21 +138,24 @@ document.addEventListener('DOMContentLoaded', function() {
   oneButton.addEventListener('click', function() {
     var code = adjustPlayback("1.0");
     chrome.tabs.executeScript(null,
-        {code: code}, function(results){console.log("Changed speed: " + results);});
+        {code: code}, function(results){console.log("Changed speed: " + results);}
+      );
   }, false);
 
   var oneFiveButton = document.getElementById('1.5-btn');
   oneFiveButton.addEventListener('click', function() {
     var code = adjustPlayback("1.5");
     chrome.tabs.executeScript(null,
-        {code: code}, function(results){console.log("Changed speed: " + results);});
+        {code: code}, function(results){console.log("Changed speed: " + results);}
+      );
   }, false);
 
   var twoButton = document.getElementById('2.0-btn');
   twoButton.addEventListener('click', function() {
     var code = adjustPlayback("2.0");
     chrome.tabs.executeScript(null,
-        {code: code}, function(results){console.log("Changed speed: " + results);});
+        {code: code}, function(results){console.log("Changed speed: " + results);}
+      );
   }, false);
 
   var manualButton = document.getElementById('manual-btn');

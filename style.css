@@ -19,6 +19,10 @@ body {
   padding: 5px;
 }
 
+#error {
+  font-size: 14px;
+}
+
 button, input, select {
   background-color: #45A29E;
   color: white;
