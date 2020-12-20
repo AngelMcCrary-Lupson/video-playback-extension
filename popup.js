@@ -1,4 +1,4 @@
-// TODO: Add CSS, Add Input Validation, Populate select input with saved values
+// TODO: Add Error Message
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -10,15 +10,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function validateSpeedInput(value) {
+    var num = parseInt(value);
+    if (num >= 0.1 && num <= 16) {
+      return true;
+    }
+    console.log("Error");
+    return false;
+  }
+
+  var selectInput = document.getElementById('custom-btns');
+
+  selectInput.addEventListener('change', (event) => {
+    console.log(event.target.value);
+    populateInput(event.target);
+  });
+
+  function populateInput(selectObject) {
+    var value = selectObject.value;
+    var btnValue = store.getItem('btn-' + value);
+    var btnSpeed = btnValue.split("-")[0];
+    var btnEnabled = btnValue.split("-")[1];
+    var customBtn = document.getElementById('custom-btn');
+    var checkbox = document.getElementById('btn-enabled');
+
+    if (btnSpeed != "0.0" && btnSpeed != "0") {
+      customBtn.value = btnSpeed;
+    } else {
+      customBtn.value = "";
+    }
+
+    if (btnEnabled == "false") {
+      checkbox.checked = false;
+    } else {
+      checkbox.checked = true;
+    }
+  }
+
   var editBtn = document.getElementById('save-btn');
   editBtn.addEventListener('click', function() {
     var speedVal = document.getElementById('custom-btn').value;
-    var enabled = document.getElementById('btn-enabled').checked;
-    var btn = document.getElementById('custom-btns').value;
-    var storeKey = "btn-" + btn;
-    var storeValue = speedVal + "-" + enabled;
-    store.setItem(storeKey, storeValue);
-    loadCustomButtons();
+    if (selectInput.value != "" && validateSpeedInput(speedVal)) {
+      var enabled = document.getElementById('btn-enabled').checked;
+      var btn = document.getElementById('custom-btns').value;
+      var storeKey = "btn-" + btn;
+      var storeValue = speedVal + "-" + enabled;
+      store.setItem(storeKey, storeValue);
+      loadCustomButtons();
+    }
   }, false);
 
   function loadCustomButtons() {
@@ -106,10 +145,14 @@ document.addEventListener('DOMContentLoaded', function() {
   var manualButton = document.getElementById('manual-btn');
   manualButton.addEventListener('click', function() {
     var input = document.getElementById('manual-speed');
-    var speed = input.value + "";
-    var code = adjustPlayback(speed);
-    chrome.tabs.executeScript(null,
-        {code: code}, function(results){console.log("Changed speed: " + results);});
+    if (validateSpeedInput(input.value)) {
+      var speed = input.value + "";
+      var code = adjustPlayback(speed);
+      chrome.tabs.executeScript(null,
+          {code: code}, function(results){console.log("Changed speed: " + results);}
+        );
+    }
+
   }, false);
 
   loadCustomButtons();
